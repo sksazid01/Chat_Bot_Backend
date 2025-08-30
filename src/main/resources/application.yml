@@ -2,12 +2,35 @@ spring:
   application:
     name: ChatBot Service
 
+
+  datasource:
+    url: ${DATABASE_URL:}
+    username: avnadmin
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  hikari:
+    maximum-pool-size: 5      # Max connections to database
+    minimum-idle: 2           # Min connections kept alive
+    connection-timeout: 30000 # Wait time for connection (30 sec)
+    idle-timeout: 600000      # Remove idle connections after 10 min
+    max-lifetime: 1800000     # Recycle connections after 30 min
+  jpa:
+    hibernate:
+      ddl-auto: update    # Auto-creates/updates database tables
+    show-sql: true        # Shows SQL queries in console (debugging)
+
+
 server:
   port: 8080
-
 
 gemini:
   api:
     key: ${GEMINI_API_KEY:}  # working with .env variable
     model: gemini-2.5-flash
     url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.SQL: DEBUG
