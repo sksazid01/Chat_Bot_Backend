@@ -261,7 +261,8 @@ public class ChatService {
                 StringBuilder summarizedContext = new StringBuilder();
                 
                 for (ChatHistory chat : conversationsWithSummaries) {
-                        if (chat.getIsSummarized() && chat.getSummary() != null && !chat.getSummary().trim().isEmpty()) {
+                        // Use safe method to handle null cases for existing records
+                        if (chat.isSummarizedSafely() && chat.getSummary() != null && !chat.getSummary().trim().isEmpty()) {
                                 summarizedContext.append(chat.getSummary()).append(" ");
                         }
                 }

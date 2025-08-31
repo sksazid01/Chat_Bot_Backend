@@ -29,9 +29,17 @@ public class ChatHistory {
     private Boolean isSummarized = false;
 
     @Column(name = "summary", columnDefinition = "TEXT")
-    private String summary;
+    private String summary="No summary";
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    
+    /**
+     * Safe method to check if conversation is summarized, handling null values
+     * @return true if summarized, false otherwise (including null cases)
+     */
+    public boolean isSummarizedSafely() {
+        return Boolean.TRUE.equals(this.isSummarized);
+    }
 }
