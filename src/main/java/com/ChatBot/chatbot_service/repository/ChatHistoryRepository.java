@@ -14,6 +14,18 @@ public interface ChatHistoryRepository extends JpaRepository<ChatHistory, Long> 
     
     // Get recent chat history for context (last N conversations)
     List<ChatHistory> findTop10ByUserOrderByCreatedAtDesc(User user);
+    
+    // Get recent detailed conversations (last 5 for detailed context)
+    List<ChatHistory> findTop5ByUserOrderByCreatedAtDesc(User user);
+    
+    // Get older conversations that need summarization (excluding recent ones)
+    List<ChatHistory> findByUserAndIsSummarizedFalseOrderByCreatedAtAsc(User user);
+    
+    // Get conversations older than a specific ID for summarization
+    List<ChatHistory> findByUserAndIdLessThanOrderByCreatedAtAsc(User user, Long id);
+    
+    // Count total conversations for a user
+    long countByUser(User user);
 }
 
 

@@ -25,6 +25,12 @@ public class ChatHistory {
     @Column(name = "response_time")
     private Long responseTime;
 
+    @Column(name = "is_summarized")
+    private Boolean isSummarized = false;
+
+    @Column(name = "summary", columnDefinition = "TEXT")
+    private String summary;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
